@@ -97,7 +97,7 @@ function SideDrawer() {
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
-      if (error.response.request.status == 401) {
+      if (error.response.request.status === 401) {
         setSnackbarmessage("Session timeout!! Redirecting to Login");
         setOpenToast(true);
         setTimeout(() => {
@@ -134,7 +134,7 @@ function SideDrawer() {
       setLoadingChat(false);
       setOpenDrawer(false);
     } catch (error) {
-      if (error.response.request.status == 401) {
+      if (error.response.request.status === 401) {
         setSnackbarmessage("Session timeout!! Redirecting to Login");
         setOpenToast(true);
         setTimeout(() => {
@@ -224,7 +224,7 @@ function SideDrawer() {
   const resetForm = () => {
     setSearch('');
     setSearchResult([]);
-};
+  };
 
 
   //useEffects
@@ -274,10 +274,10 @@ function SideDrawer() {
           value={search}
           onChange={(e) => { setSearch(e.target.value) }}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && search){
+            if (e.key === "Enter" && search) {
               e.preventDefault();
               handleSearch();
-            } 
+            }
           }} />
         <Button sx={{ backgroundColor: 'eee', padding: "2px", margin: "0" }} size="small" onClick={handleSearch}>Go</Button>
       </Box>
@@ -349,9 +349,9 @@ function SideDrawer() {
             }}
           >
             <MenuList sx={{ px: !notifications.length ? 2 : 0, pb: !notifications.length ? 1 : 0, my: 0, display: 'flex', flexDirection: 'column', fontSize: '12px', overflowY: "scroll" }}>
-              {notifications.length == 0 && "No New Messages"}
+              {notifications.length === 0 && "No New Messages"}
               {
-                notifications.length != 0 &&
+                notifications.length !== 0 &&
                 (notifications.map((n) =>
                 (<MenuItem key={n._id} sx={{ fontWeight: 'bold', backgroundColor: '#F8F8F8', mx: 1, mb: 1, px: 2, borderRadius: '10px', fontSize: '12px' }}
                   onClick={() => {
