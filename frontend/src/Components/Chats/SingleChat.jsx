@@ -24,6 +24,45 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
   const { selectedChat, setSelectedChat, user, setUser, } = ChatState();
   const navigate = useNavigate();
 
+  const fetchMessages = async () => {
+    if (!selectedChat)
+      return;
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      setLoading(true);
+
+      const { data } = await axios.get(
+        `/api/message/${selectedChat._id}`,
+        config
+      );
+      // console.log(data);
+      setMessages(data);
+      setLoading(false);
+
+      //use socket.io to join the chat room
+      socket.emit("join chat", selectedChat._id);
+    } catch (error) {
+      if (error.response.request.status === 401) {
+        setSnackbarmessage("Session timeout!! Redirecting to Login");
+        setOpen(true);
+        setTimeout(() => {
+          localStorage.removeItem("userInfo");
+          setUser({});
+          navigate("/")
+        }, 3500)
+        return;
+      }
+      setOpen(true);
+      setSnackbarmessage("Failed to load messages");
+    }
+  };
+
   useEffect(() => {
     //establish socket connection
     socket = io(ENDPOINT);
@@ -75,44 +114,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     setOpen(false);
   };
 
-  const fetchMessages = async () => {
-    if (!selectedChat)
-      return;
 
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
-
-      setLoading(true);
-
-      const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
-        config
-      );
-      // console.log(data);
-      setMessages(data);
-      setLoading(false);
-
-      //use socket.io to join the chat room
-      socket.emit("join chat", selectedChat._id);
-    } catch (error) {
-      if (error.response.request.status === 401) {
-        setSnackbarmessage("Session timeout!! Redirecting to Login");
-        setOpen(true);
-        setTimeout(() => {
-          localStorage.removeItem("userInfo");
-          setUser({});
-          navigate("/")
-        }, 3500)
-        return;
-      }
-      setOpen(true);
-      setSnackbarmessage("Failed to load messages");
-    }
-  };
 
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {

@@ -238,7 +238,7 @@ function SideDrawer() {
   useEffect(() => {
     if (!notifications.length)
       fetchNotifications();
-  }, [fetchNotifications])
+  }, [fetchNotifications, notifications.length])
 
   useEffect(() => {
     if (!socketConnected)

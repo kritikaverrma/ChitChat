@@ -110,7 +110,7 @@ function ProfileModal({ User, children }) {
                 },
                 data: { "pic": pic }
             };
-            const { data } = await axios.request(config);
+            //const { data } = await axios.request(config);
             const updatedUserInfo = {
                 ...User,
                 picture: pic
