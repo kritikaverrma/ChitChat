@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { Avatar, Box, Button, CircularProgress, Menu, MenuItem, MenuList, Tooltip, Typography, useMediaQuery } from '@mui/material'
 import Divider from '@mui/material/Divider';
@@ -157,23 +157,24 @@ function SideDrawer() {
     navigate("/");
   };
 
-  const fetchNotifications = async () => {
+
+  const fetchNotifications = useCallback(async () => {
     try {
-      let config = {
+      const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
       const response = await axios.get('/api/notification/', config);
       if (response.status !== 200)
-        throw new Error('Failed to fetch notifications')
+        throw new Error('Failed to fetch notifications');
       const notificationsArray = response.data;
-      // console.log('notificationsArray', notificationsArray)
       setNotifications(notificationsArray);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [user.token, setNotifications]);
+
 
   const markAllNotificationsAsRead = async () => {
     try {

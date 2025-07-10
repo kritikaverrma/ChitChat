@@ -12,7 +12,7 @@
     "mern",
     "chatting-app"
   ],
-  "author": "Soubhik Ghosh",
+  "author": "Kritika Verma",
   "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.11.4",

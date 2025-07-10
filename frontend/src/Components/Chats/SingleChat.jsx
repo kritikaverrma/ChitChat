@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { ChatState } from '../../Context/ChatProvider';
 import { Box, CircularProgress, IconButton, Snackbar, TextField, Typography } from '@mui/material';
 import { IoMdArrowBack } from "react-icons/io";
@@ -24,7 +24,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
   const { selectedChat, setSelectedChat, user, setUser, } = ChatState();
   const navigate = useNavigate();
 
-  const fetchMessages = async () => {
+  const fetchMessages = useCallback(async () => {
     if (!selectedChat)
       return;
 
@@ -41,27 +41,34 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
         `/api/message/${selectedChat._id}`,
         config
       );
-      // console.log(data);
       setMessages(data);
       setLoading(false);
 
-      //use socket.io to join the chat room
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
-      if (error.response.request.status === 401) {
+      if (error.response?.request?.status === 401) {
         setSnackbarmessage("Session timeout!! Redirecting to Login");
         setOpen(true);
         setTimeout(() => {
           localStorage.removeItem("userInfo");
           setUser({});
-          navigate("/")
-        }, 3500)
+          navigate("/");
+        }, 3500);
         return;
       }
       setOpen(true);
       setSnackbarmessage("Failed to load messages");
     }
-  };
+  }, [
+    selectedChat,
+    user.token,
+    setLoading,
+    setMessages,
+    setSnackbarmessage,
+    setOpen,
+    setUser,
+    navigate
+  ]);
 
   useEffect(() => {
     //establish socket connection

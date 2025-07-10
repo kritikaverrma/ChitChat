@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { defaultUserpic, picTypes } from "../../Assets/constants"
 import { ChatState } from '../../Context/ChatProvider';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
+//import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -101,15 +101,15 @@ function ProfileModal({ User, children }) {
 
     const saveProfilePicture = async () => {
         try {
-            let config = {
-                method: 'post',
-                url: '/api/User/changePic',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${User.token}`
-                },
-                data: { "pic": pic }
-            };
+            //let config = {
+            //method: 'post',
+            //url: '/api/User/changePic',
+            //headers: {
+            //'Content-Type': 'application/json',
+            //Authorization: `Bearer ${User.token}`
+            //},
+            //data: { "pic": pic }
+            //};
             //const { data } = await axios.request(config);
             const updatedUserInfo = {
                 ...User,
