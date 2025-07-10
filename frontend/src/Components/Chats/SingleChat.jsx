@@ -31,13 +31,13 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));
     socket.on('stop typing', () => setIsTyping(false));
-  }, [])
+  }, [user])
 
   useEffect(() => {
     fetchMessages();
 
     selectedChatCompare = selectedChat;
-  }, [selectedChat]);
+  }, [selectedChat, fetchMessages]);
 
   useEffect(() => {
     socket.on("message recieved", (newMessage) => {
@@ -57,7 +57,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
         socket.off("message recieved");
       };
     });
-  }, []);
+  }, [setFetchAgain]);
 
   //snackbar logic
   const [open, setOpen] = useState(false);
@@ -99,7 +99,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
       //use socket.io to join the chat room
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
-      if (error.response.request.status == 401) {
+      if (error.response.request.status === 401) {
         setSnackbarmessage("Session timeout!! Redirecting to Login");
         setOpen(true);
         setTimeout(() => {
@@ -142,7 +142,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
         setMessages([...messages, data]);
 
       } catch (error) {
-        if (error.response.request.status == 401) {
+        if (error.response.request.status === 401) {
           setSnackbarmessage("Session timeout!! Redirecting to Login");
           setOpen(true);
           setTimeout(() => {

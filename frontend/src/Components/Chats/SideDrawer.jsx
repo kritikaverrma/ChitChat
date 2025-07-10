@@ -233,12 +233,12 @@ function SideDrawer() {
     socket = io(ENDPOINT);
     socket.emit('setup', user);
     socket.on('connected', () => setSocketConnected(true));
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (!notifications.length)
       fetchNotifications();
-  }, [])
+  }, [fetchNotifications])
 
   useEffect(() => {
     if (!socketConnected)
@@ -252,7 +252,7 @@ function SideDrawer() {
     return () => {
       socket.off("new notification");
     };
-  }, [socketConnected]);
+  }, [socketConnected, setNotifications]);
 
 
   //Drawer Component
@@ -367,7 +367,7 @@ function SideDrawer() {
                 </MenuItem>)
                 ))
               }
-              {notifications.length != 0 &&
+              {notifications.length !== 0 &&
                 <Button variant='text' sx={{ width: '6rem', ml: 'auto', mr: 1, fontSize: '12px' }} onClick={markAllNotificationsAsRead}>
                   Clear All
                 </Button>}

@@ -43,7 +43,7 @@ const MyChats = ({ fetchAgain }) => {
       console.log('fetched Chats', data);
     } catch (error) {
       console.log(error.response.request.status);
-      if (error.response.request.status == 401) {
+      if (error.response.request.status === 401) {
         setSnackbarmessage("Session timeout!! Redirecting to Login");
         setOpenToast(true);
         setTimeout(() => {

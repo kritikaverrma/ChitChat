@@ -58,7 +58,7 @@ function Login() {
     }
     catch (error) {
       // console.log(error.response.status);
-      if (error.response.status == '500')
+      if (error.response.status === '500')
         setSnackbarmessage('Chit-Chat server unreachable');
       else
         setSnackbarmessage(error.response.data.message);
@@ -83,7 +83,7 @@ function Login() {
           <InputLabel shrink htmlFor="password">Password</InputLabel>
           <Input
             onKeyDown={(e) => {
-              if(e.key === "Enter" && password)
+              if (e.key === "Enter" && password)
                 submitHandler()
             }}
             id="password"

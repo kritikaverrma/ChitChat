@@ -1,12 +1,12 @@
 export const getSender = (loggedUser, users) => {
-    if(!loggedUser || !users)
+    if (!loggedUser || !users)
         return '';
     const senderName = users[0]._id === loggedUser._id ? users[1].name : users[0].name;
     return senderName;
 }
 
 export const getSenderFull = (loggedUser, users) => {
-    if(!loggedUser || !users)
+    if (!loggedUser || !users)
         return {};
     return users[0]._id === loggedUser._id ? users[1] : users[0];
 };
@@ -55,7 +55,7 @@ export const isSameUser = (messages, m, i) => {
 
 export const isSameChat = (chats, message) => {
     chats.forEach((chat) => {
-        if (chat._id == message.chat._id)
+        if (chat._id === message.chat._id)
             return true;
     })
     return false;
