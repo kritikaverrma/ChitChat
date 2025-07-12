@@ -319,7 +319,7 @@ function SideDrawer() {
         </Tooltip>
 
         <Typography variant='h6'>
-          Chat-Chat
+          Chit-Chat
         </Typography>
 
         <div style={{ marginRight: "10px" }}>
@@ -413,7 +413,7 @@ function SideDrawer() {
         </div>
       </Box >
 
-      {/* Side Drawer  */}
+      {/* Side Drawer -conditional rendering */}
       < Drawer open={openDrawer} onClose={toggleDrawer(false)} >
         {DrawerList}
       </Drawer >

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const userSchema = mongoose.Schema(
     {
@@ -32,12 +32,15 @@ userSchema.methods.matchPassword = async function (givenPassword) {
 }
 
 userSchema.pre('save', async function (next) {
-    if (!this.isModified) {
+    if (!this.isModified('password')) {
         next();
     }
 
+    console.log('[pre-save] password BEFORE hashing:', this.password);
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+    console.log('[pre-save] password AFTER hashing:', this.password);
+    next();
 })
 
 const User = mongoose.model("User", userSchema);

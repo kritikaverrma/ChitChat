@@ -5,7 +5,7 @@ import { FormControl, Input, InputLabel, InputAdornment, Box } from '@mui/materi
 import LoadingButton from '@mui/lab/LoadingButton';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
-import {picTypes} from '../../Assets/constants';
+import { picTypes } from '../../Assets/constants';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
@@ -117,7 +117,7 @@ function Signup() {
       };
 
       const { data } = await axios.post("/api/user/", { name, email, password, pic }, config);
-      // console.log(data);
+      console.log(data);
 
       setSnackbarmessage('Registration successful');
       setOpen(true);

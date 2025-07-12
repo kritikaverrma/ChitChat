@@ -50,8 +50,7 @@ function Login() {
       };
 
       const { data } = await axios.post("/api/user/login", { email, password }, config);
-      // console.log(data);
-
+      console.log(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       navigate('/chats');

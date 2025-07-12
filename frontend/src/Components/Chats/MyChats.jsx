@@ -16,16 +16,14 @@ const MyChats = ({ fetchAgain }) => {
   const [openToast, setOpenToast] = useState(false);
   const navigate = useNavigate();
   const [snackbarmessage, setSnackbarmessage] = useState('');
-  const vertical = 'bottom'
-  const horizontal = 'center'
-
+  const vertical = 'bottom';
+  const horizontal = 'center';
   const { selectedChat, setSelectedChat, user, setUser, chats, setChats } = ChatState();
 
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpenToast(false);
   };
 

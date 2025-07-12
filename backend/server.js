@@ -66,7 +66,7 @@ const io = require('socket.io')(server, {
     pingTimeout: 120000, // 120 seconds timeout
     pingInterval: 25000, // 25 seconds interval
     cors: {
-        origin: "http://localhost:3000"
+        origin: process.env.CLIENT_URL,
     }
 });
 

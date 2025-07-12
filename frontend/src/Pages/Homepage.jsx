@@ -7,7 +7,6 @@ import Signup from "../Components/Authentication/Signup"
 function Homepage() {
   const [value, setValue] = useState('one');
   const navigate = useNavigate();
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -15,20 +14,23 @@ function Homepage() {
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (userInfo) 
-        navigate("/chats");
+    if (userInfo)
+      navigate("/chats");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+  }, []);
 
   return (
     <Container maxWidth="sm" sx={{ fontFamily: 'Open Sans' }} >
+
+      {/**Masthead */}
       <Box display="flex" alignItems="center" justifyContent="center"
         p={2} m="30px 0 15px 0" borderRadius="5px" sx={{ bgcolor: "white" }}>
         <Typography variant="body1">
-          Chit - Chat 
+          Chit - Chat
         </Typography>
       </Box>
 
+      {/**Form */}
       <Box p={1} borderRadius="5px" sx={{ bgcolor: "white", width: '100%' }}>
         <Tabs
           value={value}

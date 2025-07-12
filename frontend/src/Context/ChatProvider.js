@@ -8,14 +8,12 @@ const ChatProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [notifications, setNotifications] = useState([]);
     const [chats, setChats] = useState();
-
     const navigate = useNavigate();
-
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         setUser(userInfo);
 
-        if (!userInfo) 
+        if (!userInfo)
             navigate("/");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate]);
@@ -38,6 +36,8 @@ const ChatProvider = ({ children }) => {
     );
 };
 
+//custom hook to simplify consuming the context
+//Instead of writing useContext(ChatContext) everywhere, you can just write:const { user } = ChatState();
 export const ChatState = () => {
     return useContext(ChatContext);
 };

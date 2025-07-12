@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
 const authUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        // console.log(req.body);
+        console.log("req.body in login controller", req.body);
         if (!email || !password) {
             res.status(400).json({
                 message: 'All fields needed for logging in'
@@ -53,26 +53,29 @@ const authUser = async (req, res) => {
 
         const user = await User.findOne({ email: email });
 
-        if (user && (await user.matchPassword(password))) {
-            res.json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                isAdmin: user.isAdmin,
-                picture: user.picture,
-                token: generateToken(user._id),
-            });
-        }
-        else if (!user) {
+        if (!user) {
             res.status(400).json({
                 message: 'New Users need to Signup!'
             });
         }
-        else if (user.password !== password) {
-            res.status(400).json({
-                message: 'Incorrect Password'
+        const isMatch = await user.matchPassword(password);
+        console.log("isMatch", isMatch);
+
+        if (!isMatch) {
+            return res.status(400).json({
+                message: 'Incorrect password'
             });
         }
+
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            picture: user.picture,
+            token: generateToken(user._id),
+        });
+
     }
     catch (e) {
         console.log(e);

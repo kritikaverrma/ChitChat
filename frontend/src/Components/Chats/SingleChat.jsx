@@ -22,6 +22,10 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const { selectedChat, setSelectedChat, user, setUser, } = ChatState();
+  const [open, setOpen] = useState(false);
+  const [snackbarmessage, setSnackbarmessage] = useState('');
+  const vertical = 'bottom'
+  const horizontal = 'center'
   const navigate = useNavigate();
 
   const fetchMessages = useCallback(async () => {
@@ -106,10 +110,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
   }, [setFetchAgain]);
 
   //snackbar logic
-  const [open, setOpen] = useState(false);
-  const [snackbarmessage, setSnackbarmessage] = useState('');
-  const vertical = 'bottom'
-  const horizontal = 'center'
+
 
 
   //business logic
