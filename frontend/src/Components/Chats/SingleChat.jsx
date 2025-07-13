@@ -42,7 +42,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
       setLoading(true);
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${process.env.REACT_APP_API_URL}/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -138,7 +138,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
         //doesnot invoke immediately as the state change is batched
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          `${process.env.REACT_APP_API_URL}/api/message`,
           {
             content: newMessage,
             chatId: selectedChat,

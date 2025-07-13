@@ -49,7 +49,7 @@ function Login() {
         }
       };
 
-      const { data } = await axios.post("/api/user/login", { email, password }, config);
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/user/login`, { email, password }, config);
       console.log(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
