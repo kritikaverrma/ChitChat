@@ -38,6 +38,10 @@ const __dirname1 = path.resolve();
 
 // --------------------------DEPLOYMENT---------------------------
 
+app.get("/", (req, res) => {
+    res.send("API is running..");
+});
+
 //error Handling
 app.use(notFound);
 app.use(errorHandler);
