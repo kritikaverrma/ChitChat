@@ -20,6 +20,7 @@ const port = process.env.PORT || 5000;
 //start DB and enable .evn file
 dotenv.config();
 console.log('Loaded CLIENT_URL:', process.env.CLIENT_URL);
+console.log('ALL ENV:', process.env);
 connectDB();
 
 //to accept JSON DATA
