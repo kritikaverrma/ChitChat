@@ -25,6 +25,20 @@ connectDB();
 
 //to accept JSON DATA
 app.use(express.json());
+const allowedOrigins = ['https://chit-chat-jade.vercel.app'];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // allow requests with no origin like mobile apps or curl
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true // if you send cookies or auth headers
+}));
 
 //routes
 app.use('/api/user', userRoutes);
@@ -45,20 +59,7 @@ app.get("/", (req, res) => {
 //error Handling
 app.use(notFound);
 app.use(errorHandler);
-const allowedOrigins = ['https://chit-chat-jade.vercel.app'];
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // allow requests with no origin like mobile apps or curl
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        } else {
-            return callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true // if you send cookies or auth headers
-}));
 
 //start app
 const server = app.listen(port, () => {
