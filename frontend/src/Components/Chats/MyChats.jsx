@@ -40,18 +40,26 @@ const MyChats = ({ fetchAgain }) => {
       setChats(data);
       console.log('fetched Chats', data);
     } catch (error) {
-      console.log(error.response.request.status);
-      if (error.response.request.status === 401) {
-        setSnackbarmessage("Session timeout!! Redirecting to Login");
-        setOpenToast(true);
-        setTimeout(() => {
-          localStorage.removeItem("userInfo");
-          setUser({});
-          navigate("/")
-        }, 3500)
-        return;
+      if (error.response) {
+        // The server responded with a status code outside 2xx
+        console.log(error.response.status);
+        if (error.response.status === 401) {
+          setSnackbarmessage("Session timeout!! Redirecting to Login");
+          setOpenToast(true);
+          setTimeout(() => {
+            // redirect to login
+          }, 3000);
+        }
+      } else if (error.request) {
+        // The request was made but no response received
+        console.log('Request made but no response:', error.request);
+      } else {
+        // Something happened in setting up the request
+        console.log('Error', error.message);
       }
-      setSnackbarmessage(error.response.data.message ? error.response.data.message : "Failed to load chats");
+
+
+
       setOpenToast(true);
     }
   };

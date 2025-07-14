@@ -14,7 +14,10 @@ import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import ChatLoading from '../UserAvatar/ChatLoading'
 import UserCard from "../UserAvatar/UserCard";
-import NotificationBadge, { Effect } from 'react-notification-badge';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+// or any icon you like
+
 import io from 'socket.io-client'
 import ConfirmationModal from "../Modals/ConfirmationModal";
 
@@ -337,7 +340,10 @@ function SideDrawer() {
             <IoIosNotifications size={25} />
             {notifications.length !== 0 &&
               <div style={{ zIndex: 10, position: 'absolute', top: 0, right: 10 }}>
-                <NotificationBadge count={notifications.length} effect={Effect.SCALE} />
+                <Badge badgeContent={notifications.length} color="primary">
+                  <NotificationsIcon />
+                </Badge>
+
               </div>}
           </Button>
           <Menu

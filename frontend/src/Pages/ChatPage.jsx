@@ -4,13 +4,12 @@ import { Box } from '@mui/material'
 import MyChats from '../Components/Chats/MyChats'
 import ChatBox from '../Components/Chats/ChatBox'
 import SideDrawer from '../Components/Chats/SideDrawer'
-
 function ChatPage() {
   console.log("In ChatPage");
   const { user } = ChatState();
   const [fetchAgain, setFetchAgain] = useState(false);
-
-
+  //ChatBox is the component where changes happen (like sending a new message, creating a chat)
+  //MyChats is the component that should refresh when there’s a change
   return (
     <div style={{ width: "100%" }}>
       {user && <SideDrawer />}
