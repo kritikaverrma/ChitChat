@@ -11,6 +11,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const messageRoutes = require('./Routes/messageRoutes');
 const Notification = require('./models/notificationModel');
 const path = require('path');
+const cors = require("cors");
 
 
 //assignments
