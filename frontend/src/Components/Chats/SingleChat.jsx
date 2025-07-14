@@ -11,7 +11,6 @@ import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client'
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
 function SingleChat({ fetchAgain, setFetchAgain }) {

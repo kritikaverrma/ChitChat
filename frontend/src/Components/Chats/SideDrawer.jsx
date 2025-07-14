@@ -21,7 +21,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import io from 'socket.io-client'
 import ConfirmationModal from "../Modals/ConfirmationModal";
 
-const ENDPOINT = "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
 var socket;
 
 function SideDrawer() {
@@ -234,7 +234,7 @@ function SideDrawer() {
   //useEffects
   useEffect(() => {
     //establish socket connection
-    socket = io(ENDPOINT);
+    socket = io(API_URL);
     socket.emit('setup', user);
     socket.on('connected', () => setSocketConnected(true));
   }, [user]);

@@ -74,6 +74,8 @@ const io = require('socket.io')(server, {
     pingInterval: 25000, // 25 seconds interval
     cors: {
         origin: process.env.CLIENT_URL,
+        credentials: true
+
     }
 });
 
