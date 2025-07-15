@@ -70,3 +70,7 @@ backend/package-lock.json
 # Environment variable files
 .env
 .env.*
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
