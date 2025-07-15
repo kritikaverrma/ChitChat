@@ -127,7 +127,7 @@ function SideDrawer() {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`/api/chat`, { userId }, config);
+      const { data } = await axios.post(`${API_URL}/api/chat`, { userId }, config);
 
       //if chat is already present, then keep the chat at the front of all the chats
       if (!chats.find((c) => c._id === data._id))
