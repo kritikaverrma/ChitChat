@@ -96,7 +96,7 @@ function SideDrawer() {
       };
 
       const { data } = await axios.get(`${API_URL}/api/user?search=${search}`, config);
-
+      console.log("data after search is ran", data);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
