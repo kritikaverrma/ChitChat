@@ -168,7 +168,7 @@ function SideDrawer() {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/notification/`, config);
+      const response = await axios.get(`${API_URL}/api/notification/`, config);
       if (response.status !== 200)
         throw new Error('Failed to fetch notifications');
       const notificationsArray = response.data;
@@ -184,7 +184,7 @@ function SideDrawer() {
       let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: 'api/notification/markAllasRead',
+        url: `${API_URL}/api/notification/markAllasRead`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -206,7 +206,7 @@ function SideDrawer() {
     try {
       let config = {
         method: 'patch',
-        url: '/api/notification/markasRead',
+        url: `${API_URL}/api/notification/markasRead`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`
