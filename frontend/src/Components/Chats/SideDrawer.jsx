@@ -361,7 +361,7 @@ function SideDrawer() {
             <MenuList sx={{ px: !notifications.length ? 2 : 0, pb: !notifications.length ? 1 : 0, my: 0, display: 'flex', flexDirection: 'column', fontSize: '12px', overflowY: "scroll" }}>
               {notifications.length === 0 && "No New Messages"}
               {
-                notifications.length !== 0 &&
+                Array.isArray(notifications) && notifications.length !== 0 &&
                 (notifications.map((n) =>
                 (<MenuItem key={n._id} sx={{ fontWeight: 'bold', backgroundColor: '#F8F8F8', mx: 1, mb: 1, px: 2, borderRadius: '10px', fontSize: '12px' }}
                   onClick={() => {

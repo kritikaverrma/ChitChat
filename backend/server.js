@@ -27,6 +27,8 @@ connectDB();
 app.use(express.json());
 const allowedOrigins = ['https://chit-chat-jade.vercel.app'];
 
+
+//CORS FOR REST APIs
 app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin like mobile apps or curl
@@ -67,6 +69,7 @@ const server = app.listen(port, () => {
 })
 
 
+//CORS FOR SOCKET.IO
 const io = require('socket.io')(server, {
     // This configuration ensures that the server pings the client every 25 seconds
     // It waits up to 2 mins for a response before considering the client disconnected.
