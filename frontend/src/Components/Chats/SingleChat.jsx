@@ -75,7 +75,10 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 
   useEffect(() => {
     //establish socket connection
-    socket = io(API_URL);
+    socket = io(API_URL, {
+      transports: ["websocket", "polling"],   // default, but explicit is good
+      withCredentials: true
+    });
     socket.emit('setup', user);
     socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));
