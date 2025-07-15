@@ -95,7 +95,7 @@ function SideDrawer() {
         },
       };
 
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/user?search=${search}`, config);
 
       setLoading(false);
       setSearchResult(data);
@@ -168,7 +168,7 @@ function SideDrawer() {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const response = await axios.get('/api/notification/', config);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/notification/`, config);
       if (response.status !== 200)
         throw new Error('Failed to fetch notifications');
       const notificationsArray = response.data;

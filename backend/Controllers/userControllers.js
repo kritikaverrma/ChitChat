@@ -113,7 +113,7 @@ const changeProfilePicture = async (req, res) => {
 
 // api/user?search={username}
 const allUsers = async (req, res) => {
-    // console.log(req.query.search);22
+    console.log(req.query.search);
     const keyword = req.query.search ? {
         $or: [
             { name: { $regex: req.query.search, $options: "i" } },
