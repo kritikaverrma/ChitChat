@@ -10,7 +10,7 @@ import styles from './style.module.css'
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client'
 import { useNavigate } from 'react-router-dom';
-
+const API_URL = process.env.REACT_APP_API_URL;
 var socket, selectedChatCompare;
 
 function SingleChat({ fetchAgain, setFetchAgain }) {
@@ -75,7 +75,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 
   useEffect(() => {
     //establish socket connection
-    socket = io(ENDPOINT);
+    socket = io(API_URL);
     socket.emit('setup', user);
     socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));

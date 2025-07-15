@@ -66,3 +66,7 @@ backend/.eslintcache
 package-lock.json
 frontend/package-lock.json
 backend/package-lock.json
+
+# Environment variable files
+.env
+.env.*
